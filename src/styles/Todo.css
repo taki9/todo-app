@@ -1,0 +1,29 @@
+.todo {
+  display: flex;
+  align-items: center;
+  min-width: 300px;
+  margin-bottom: 5px;
+  padding: 5px 0;
+  list-style: none;
+  border-bottom: 1px solid darkgray;
+}
+
+.todo--completed {
+  text-decoration: line-through;
+}
+
+.todo__checkbox {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+
+.todo__delete {
+  margin-left: auto;
+  width: 15px;
+  height: 15px;
+  filter: invert(1);
+  cursor: pointer;
+}

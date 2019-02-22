@@ -1,0 +1,23 @@
+.edit-text {
+  display: flex;
+  width: 100%;
+}
+
+.edit-text__input {
+  width: 100%;
+  margin-right: 10px;
+  /* background-color: #282c34; */
+  padding: 0 5px;
+  /* color: white; */
+}
+
+.edit-text__button {
+  margin-left: auto;
+  padding: 3px 1rem;
+  background-color: #61dafb;
+  border-color: lightskyblue;
+  font-size: 14px;
+  font-weight: bold;
+  color: #282c34;
+}
+
