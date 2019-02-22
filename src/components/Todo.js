@@ -3,7 +3,7 @@ import '../styles/Todo.css';
 import React from 'react';
 import { connect } from 'react-redux';
 import EditText from './EditText';
-import { toggleTodo, deleteTodo } from '../actions';
+import { toggleTodo } from '../actions';
 
 class Todo extends React.PureComponent {
   render() {
@@ -18,8 +18,7 @@ class Todo extends React.PureComponent {
 
 const mapDispatchToProps = dispatch => {
   return {
-      toggleTodo: title => dispatch(toggleTodo(title)),
-      deleteTodo: title => dispatch(deleteTodo(title))
+      toggleTodo: title => dispatch(toggleTodo(title))
   }
 }
 

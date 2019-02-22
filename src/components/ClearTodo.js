@@ -7,13 +7,13 @@ import { clearAllTodo } from '../actions';
 class ClearTodo extends React.PureComponent {
   render() {
     return (
-      <button className="clear-todo" onClick={ev => this.props.clearTodo()}>Clear</button>
+      <button className="clear-todo" onClick={ev => this.props.clearAllTodo()}>Clear</button>
     )
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  clearTodo: () => dispatch(clearAllTodo())
+  clearAllTodo: () => dispatch(clearAllTodo())
 })
 
 export default connect(null, mapDispatchToProps)(ClearTodo);

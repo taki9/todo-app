@@ -60,7 +60,9 @@ class EditText extends React.PureComponent {
   renderEditMode() {
     return(
       <form className="edit-text" onSubmit={ev => this.handleSave(ev)}>
-        <input className="edit-text__input" type="text" autoFocus={true} required={true} value={this.state.inputValue} onChange={ev => this.handleChange(ev)} onBlur={ev => this.handleInputExit(ev)} />
+        <input className="edit-text__input"type="text" autoFocus={true} required={true} value={this.state.inputValue}
+          onChange={ev => this.handleChange(ev)} onBlur={ev => this.handleInputExit(ev)} />
+
         <button className="edit-text__button" type="submit" ref={node => this.saveButton = node}>Save</button>
       </form>
     )
