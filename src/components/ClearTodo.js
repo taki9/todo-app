@@ -1,6 +1,7 @@
 import '../styles/ClearTodo.css';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { clearAllTodo } from '../actions';
 
@@ -12,8 +13,10 @@ class ClearTodo extends React.PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  clearAllTodo: () => dispatch(clearAllTodo())
-})
+ClearTodo.propTypes = {
+  clearAllTodo: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = { clearAllTodo }
 
 export default connect(null, mapDispatchToProps)(ClearTodo);

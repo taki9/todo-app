@@ -1,16 +1,13 @@
 import '../styles/AddTodoForm.css';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
 
 class AddTodoForm extends React.PureComponent {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      inputValue: ''
-    }
+  state = {
+    inputValue: ''
   }
 
   updateInputValue(ev) {
@@ -38,8 +35,11 @@ class AddTodoForm extends React.PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  addTodo: title => dispatch(addTodo(title))
-})
+AddTodoForm.propTypes = {
+  addTodo: PropTypes.func.isRequired
+}
+
+
+const mapDispatchToProps = { addTodo }
 
 export default connect(null, mapDispatchToProps)(AddTodoForm);

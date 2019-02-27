@@ -3,22 +3,27 @@ export const addTodo = title => ({
   title
 })
 
-export const toggleTodo = title => ({
+export const toggleTodo = index => ({
   type: 'TOGGLE_TODO',
-  title
+  index
 })
 
-export const patchTodo = (title, previousTitle) => ({
+export const patchTodo = (index, title) => ({
   type: 'PATCH_TODO',
-  title,
-  previousTitle
+  index,
+  title
 })
 
-export const deleteTodo = title => ({
+export const deleteTodo = index => ({
   type: 'DELETE_TODO',
-  title
+  index
 })
 
 export const clearAllTodo = () => ({
   type: 'CLEAR_ALL_TODO'
+})
+
+export const setSearchQuery = query => ({
+  type: 'SET_SEARCH_QUERY',
+  query
 })

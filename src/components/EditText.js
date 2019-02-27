@@ -2,17 +2,14 @@ import '../styles/EditText.css';
 import rubbishBin from '../images/rubbish-bin.svg';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { patchTodo, deleteTodo } from '../actions';
 
 class EditText extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      editing: false,
-      inputValue: this.props.title
-    }
+  state = {
+    editing: false,
+    inputValue: this.props.title
   }
 
   handleChange(ev) {
@@ -35,7 +32,7 @@ class EditText extends React.PureComponent {
   handleSave(ev) {
     ev.preventDefault()
 
-    this.props.patchTodo(this.state.inputValue, this.props.title);
+    this.props.patchTodo(this.props.index, this.state.inputValue);
 
     this.setState({
       editing: false
@@ -52,7 +49,7 @@ class EditText extends React.PureComponent {
     return(
       <React.Fragment>
         <span className={this.props.className} onClick={ev => this.activateEditMode()}>{this.props.title}</span>
-        <img className="todo__delete" src={rubbishBin} alt="delete" onClick={() => this.props.deleteTodo(this.props.title)} />
+        <img className="todo__delete" src={rubbishBin} alt="delete" onClick={() => this.props.deleteTodo(this.props.index)} />
       </React.Fragment>
     )
   }
@@ -73,11 +70,17 @@ class EditText extends React.PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-      patchTodo: (title, previousTodo) => dispatch(patchTodo(title, previousTodo)),
-      deleteTodo: title => dispatch(deleteTodo(title))
-  }
+EditText.propTypes = {
+  className: PropTypes.string,
+  index: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  patchTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired
+}
+
+const mapDispatchToProps = {
+  patchTodo,
+  deleteTodo
 }
 
 export default connect(null, mapDispatchToProps)(EditText);
