@@ -3,7 +3,7 @@ import '../styles/AddTodoForm.css';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addTodo } from '../actions';
+import { addTodo } from '../thunks';
 
 class AddTodoForm extends React.PureComponent {
   state = {

@@ -1,24 +1,24 @@
-import initialState from './initialState';
+import * as actionNames from '../actions/actionNames';
 
-const todos = (state = initialState.todos, action) => {
+const todos = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case actionNames.ADD_TODO:
       return [ ...state, { title: action.title, completed: false } ];
-    case 'TOGGLE_TODO':
+    case actionNames.TOGGLE_TODO:
       return state.map((todo, index) =>
         index === action.index
           ? { ...todo, completed: !todo.completed }
           : todo
       );
-    case 'PATCH_TODO':
-        return state.map((todo, index) =>
-          index === action.index
-            ? { ...todo, title: action.title }
-            : todo
-        );
-    case 'DELETE_TODO':
-        return state.filter((_, index) => index !== action.index);
-    case 'CLEAR_ALL_TODO':
+    case actionNames.PATCH_TODO:
+      return state.map((todo, index) =>
+        index === action.index
+          ? { ...todo, title: action.title }
+          : todo
+      );
+    case actionNames.DELETE_TODO:
+      return state.filter((_, index) => index !== action.index);
+    case actionNames.CLEAR_ALL_TODO:
       return [];
     default:
       return state;

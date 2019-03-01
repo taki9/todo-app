@@ -4,12 +4,16 @@ import rubbishBin from '../images/rubbish-bin.svg';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { patchTodo, deleteTodo } from '../actions';
+import { patchTodo, deleteTodo } from '../thunks';
 
 class EditText extends React.PureComponent {
   state = {
     editing: false,
     inputValue: this.props.title
+  }
+
+  componentWillReceiveProps(nexProps) {
+    this.setState({ inputValue: nexProps.title })
   }
 
   handleChange(ev) {
@@ -48,8 +52,9 @@ class EditText extends React.PureComponent {
   renderViewMode() {
     return(
       <React.Fragment>
-        <span className={this.props.className} onClick={ev => this.activateEditMode()}>{this.props.title}</span>
+        <span className={this.props.className} onClick={ev => this.activateEditMode()}>{this.state.inputValue}</span>
         <img className="todo__delete" src={rubbishBin} alt="delete" onClick={() => this.props.deleteTodo(this.props.index)} />
+        <span>{this.props.index}</span>
       </React.Fragment>
     )
   }

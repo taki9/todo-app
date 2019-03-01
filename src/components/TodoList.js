@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Todo from './Todo';
 import TodoFilter from './TodoFilter';
-import { getTodos, getNumberOfTodos, getNumberOfCompleted, filterTodos } from '../selectors';
+import { getNumberOfTodos, getNumberOfCompleted, getFilterTodos } from '../selectors';
 
 class TodoList extends React.PureComponent {
   render() {
@@ -31,7 +31,7 @@ TodoList.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    todos: filterTodos(state),
+    todos: getFilterTodos(state),
     numberOfCompleted: getNumberOfCompleted(state),
     numberOfTodos: getNumberOfTodos(state)
   }
