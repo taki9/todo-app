@@ -4,11 +4,7 @@ const todoKey = 'todos';
 export const getTodos = () => {
   let todos = localStorage.getItem(todoKey)
 
-  if (todos === null) {
-    return [];
-  }
-
-  return JSON.parse(todos);
+  return todos ? JSON.parse(todos) : [];
 }
 
 export const pushTodo = (title) => {
