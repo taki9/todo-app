@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 const getSearchValue = state => state.search;
-const getTodos = state => state.todos;
+export const getTodos = state => state.todos;
 
 export const getFilterTodos = createSelector([ getSearchValue, getTodos ],
   (searchValue, todos) => todos.filter(todo => todo.title.includes(searchValue))

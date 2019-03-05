@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import EditText from './EditText';
-import { toggleTodo } from '../thunks';
+import { toggleTodo } from '../actions/thunks';
 
 class Todo extends React.PureComponent {
   render() {
