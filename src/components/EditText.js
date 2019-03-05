@@ -4,7 +4,7 @@ import rubbishBin from '../images/rubbish-bin.svg';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { patchTodo, deleteTodo } from '../thunks';
+import { patchTodo, deleteTodo } from '../actions/thunks';
 
 class EditText extends React.PureComponent {
   state = {

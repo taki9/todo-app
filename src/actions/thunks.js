@@ -1,4 +1,5 @@
-import * as actions from './actions';
+import * as actions from '.';
+import { getTodos } from '../selectors';
 
 export const setInitialState = () => {
   return async (dispatch, getState, localStorage) => {
@@ -9,36 +10,41 @@ export const setInitialState = () => {
 }
 
 export const addTodo = title => {
-  return async (dispatch, getState, localStorage) => {
-    await localStorage.pushTodo(title);
+  return (dispatch, getState, localStorage) => {
     dispatch(actions.addTodo(title));
+
+    localStorage.setTodos(getTodos(getState()));
   }
 }
 
 export const deleteTodo = index => {
-  return async (dispatch, getState, localStorage) => {
-    await localStorage.removeTodo(index);
+  return (dispatch, getState, localStorage) => {
     dispatch(actions.deleteTodo(index));
+
+    localStorage.setTodos(getTodos(getState()));
   }
 }
 
 export const toggleTodo = index => {
-  return async (dispatch, getState, localStorage) => {
-    await localStorage.markAsCompleted(index);
+  return (dispatch, getState, localStorage) => {
     dispatch(actions.toggleTodo(index));
+
+    localStorage.setTodos(getTodos(getState()));
   }
 }
 
 export const clearAllTodo = index => {
-  return async (dispatch, getState, localStorage) => {
-    await localStorage.clearTodos(index);
+  return (dispatch, getState, localStorage) => {
     dispatch(actions.clearAllTodo(index));
+
+    localStorage.setTodos(getTodos(getState()));
   }
 }
 
 export const patchTodo = (index, title) => {
-  return async (dispatch, getState, localStorage) => {
-    await localStorage.editTodo(index, title);
+  return (dispatch, getState, localStorage) => {
     dispatch(actions.patchTodo(index, title));
+
+    localStorage.setTodos(getTodos(getState()));
   }
 }

@@ -3,7 +3,7 @@ import '../styles/ClearTodo.css';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { clearAllTodo } from '../thunks';
+import { clearAllTodo } from '../actions/thunks';
 
 class ClearTodo extends React.PureComponent {
   render() {

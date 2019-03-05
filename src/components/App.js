@@ -6,7 +6,7 @@ import AddTodoForm from './AddTodoForm';
 import TodoList from './TodoList';
 import ClearTodo from './ClearTodo';
 import { connect } from 'react-redux';
-import { setInitialState } from '../thunks';
+import { setInitialState } from '../actions/thunks';
 
 class App extends Component {
   componentDidMount() {

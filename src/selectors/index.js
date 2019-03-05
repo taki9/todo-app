@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 export const getSearchValue = state => state.search;
+
 export const getTodos = state => state.todos;
 
 export const getFilterTodos = createSelector(
