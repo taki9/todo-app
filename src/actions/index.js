@@ -1,5 +1,10 @@
 import * as actionNames from './actionNames';
 
+export const setTodos = todos => ({
+  type: actionNames.SET_TODOS,
+  todos
+})
+
 export const addTodo = title => ({
   type: actionNames.ADD_TODO,
   title

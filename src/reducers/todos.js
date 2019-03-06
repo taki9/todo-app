@@ -2,6 +2,8 @@ import * as actionNames from '../actions/actionNames';
 
 const todos = (state = [], action) => {
   switch (action.type) {
+    case actionNames.SET_TODOS:
+      return action.todos
     case actionNames.ADD_TODO:
       return [ ...state, { title: action.title, completed: false } ];
     case actionNames.TOGGLE_TODO:

@@ -2,10 +2,10 @@ import * as actions from '.';
 import { getTodos } from '../selectors';
 
 export const setInitialState = () => {
-  return async (dispatch, getState, localStorage) => {
-    const todos = await localStorage.getTodos();
+  return (dispatch, getState, localStorage) => {
+    const todos = localStorage.getTodos();
 
-    todos.map(todo => dispatch(actions.addTodo(todo.title)));
+    dispatch(actions.setTodos(todos));
   }
 }
 

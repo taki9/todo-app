@@ -1,6 +1,11 @@
 import * as selectors from '../selectors';
 
 describe('selectors', () => {
+  const todos = [
+    { title: 'a', completed: false },
+    { title: 'b', completed: true }
+  ];
+
   describe('getSearchValue', () => {
     test('it returns the search value', () => {
       const state = { search: 'abc' };
@@ -9,17 +14,23 @@ describe('selectors', () => {
     });
   });
 
+  describe('getNumberOfTodos', () => {
+    test('it returns the num of todos', () => {
+      const state = { todos };
+      const result = selectors.getNumberOfTodos(state);
+      expect(result).toBe(2);
+    });
+  });
+
   describe('getNumberOfCompleted', () => {
     test('it returns the num of completed', () => {
-      const state = { todos: [{ title: 'a', completed: false }, { title: 'b', completed: true }] };
+      const state = { todos };
       const result = selectors.getNumberOfCompleted(state);
       expect(result).toBe(1);
     });
   });
 
   describe('getFilterTodos', () => {
-    const todos = [{ title: 'a', completed: false }, { title: 'b', completed: true }];
-
     test('it returns all of the todos if there is no search keyword', () => {
       const state = { search: '', todos };
       const result = selectors.getFilterTodos(state);
