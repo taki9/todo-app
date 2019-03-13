@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import AddTodoForm from '../components/AddTodoForm';
 import TodoList from '../components/TodoList';
@@ -13,7 +13,9 @@ class Todos extends React.PureComponent {
         <TodoList />
         <ClearTodo />
 
-        <Link className="link" to="/">Back to homepage</Link>
+        <Link className="link" to="/">
+          Back to homepage
+        </Link>
       </React.Fragment>
     );
   }

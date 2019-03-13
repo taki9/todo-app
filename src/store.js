@@ -4,7 +4,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { routerMiddleware } from 'connected-react-router';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import * as localStorage from './localStorage';
+import api from './api';
+// import * as localStorage from './localStorage';
 
 export const history = createBrowserHistory();
 
@@ -14,10 +15,10 @@ export default () => {
     composeWithDevTools(
       applyMiddleware(
         routerMiddleware(history),
-        thunk.withExtraArgument(localStorage)
+        thunk.withExtraArgument(/* localStorage, */ api)
       )
     )
   );
 
   return store;
-}
+};

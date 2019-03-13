@@ -10,20 +10,32 @@ class Todo extends React.PureComponent {
   render() {
     return (
       <li className="todo">
-        <input className="todo__checkbox" type="checkbox" checked={this.props.completed} onChange={() => this.props.toggleTodo(this.props.index)}></input>
-        <EditText index={this.props.index} title={this.props.title} className={this.props.completed ? 'todo--completed' : ''} />
+        <input
+          className="todo__checkbox"
+          type="checkbox"
+          checked={this.props.completed}
+          onChange={() => this.props.toggleTodo(this.props.id)}
+        />
+        <EditText
+          id={this.props.id}
+          title={this.props.title}
+          className={this.props.completed ? 'todo--completed' : ''}
+        />
       </li>
-    )
+    );
   }
 }
 
 Todo.propTypes = {
-  index: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,
   toggleTodo: PropTypes.func.isRequired
-}
+};
 
-const mapDispatchToProps = { toggleTodo }
+const mapDispatchToProps = { toggleTodo };
 
-export default connect(null, mapDispatchToProps)(Todo);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Todo);

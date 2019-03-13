@@ -29,6 +29,9 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = { setInitialState }
+const mapDispatchToProps = { setInitialState };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

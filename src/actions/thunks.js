@@ -1,50 +1,92 @@
 import * as actions from '.';
-import { getTodos } from '../selectors';
+import { /* getTodos, */ getTodoById } from '../selectors';
 
 export const setInitialState = () => {
-  return (dispatch, getState, localStorage) => {
-    const todos = localStorage.getTodos();
-
-    dispatch(actions.setTodos(todos));
-  }
-}
+  return async (dispatch, getState, /* localStorage */ api) => {
+    // const todos = localStorage.getTodos();
+    try {
+      const todos = await api.get('http://localhost:8000/todos');
+      dispatch(actions.resolveTodos(todos));
+    } catch (error) {
+      alert(`${error.status} - ${error.message}`);
+    }
+  };
+};
 
 export const addTodo = title => {
-  return (dispatch, getState, localStorage) => {
-    dispatch(actions.addTodo(title));
+  return async (dispatch, getState, /* localStorage */ api) => {
+    try {
+      const todo = await api.post('http://localhost:8000/todos', {
+        body: { title }
+      });
 
-    localStorage.setTodos(getTodos(getState()));
-  }
-}
+      dispatch(actions.resolveTodo(todo));
 
-export const deleteTodo = index => {
-  return (dispatch, getState, localStorage) => {
-    dispatch(actions.deleteTodo(index));
+      // localStorage.setTodos(getTodos(getState()));
+    } catch (error) {
+      alert(`${error.status} - ${error.message}`);
+    }
+  };
+};
 
-    localStorage.setTodos(getTodos(getState()));
-  }
-}
+export const deleteTodo = id => {
+  return async (dispatch, getState, /* localStorage */ api) => {
+    try {
+      const todos = await api.delete(`http://localhost:8000/todos/${id}`);
 
-export const toggleTodo = index => {
-  return (dispatch, getState, localStorage) => {
-    dispatch(actions.toggleTodo(index));
+      dispatch(actions.resolveTodos(todos));
 
-    localStorage.setTodos(getTodos(getState()));
-  }
-}
+      // localStorage.setTodos(getTodos(getState()));
+    } catch (error) {
+      alert(`${error.status} - ${error.message}`);
+    }
+  };
+};
 
-export const clearAllTodo = index => {
-  return (dispatch, getState, localStorage) => {
-    dispatch(actions.clearAllTodo(index));
+export const toggleTodo = id => {
+  return async (dispatch, getState, /* localStorage */ api) => {
+    const todoBefore = getTodoById(id, getState());
 
-    localStorage.setTodos(getTodos(getState()));
-  }
-}
+    try {
+      const todo = await api.put(`http://localhost:8000/todos/${id}`, {
+        body: { completed: todoBefore ? !todoBefore.completed : true }
+      });
 
-export const patchTodo = (index, title) => {
-  return (dispatch, getState, localStorage) => {
-    dispatch(actions.patchTodo(index, title));
+      dispatch(actions.resolveTodo(todo));
 
-    localStorage.setTodos(getTodos(getState()));
-  }
-}
+      // localStorage.setTodos(getTodos(getState()));
+    } catch (error) {
+      alert(`${error.status} - ${error.message}`);
+    }
+  };
+};
+
+export const clearAllTodo = () => {
+  return async (dispatch, getState, /* localStorage */ api) => {
+    try {
+      const todos = await api.delete('http://localhost:8000/todos');
+
+      dispatch(actions.resolveTodos(todos));
+
+      // localStorage.setTodos(getTodos(getState()));
+    } catch (error) {
+      alert(`${error.status} - ${error.message}`);
+    }
+  };
+};
+
+export const patchTodo = (id, title) => {
+  return async (dispatch, getState, /* localStorage */ api) => {
+    try {
+      const todo = await api.put(`http://localhost:8000/todos/${id}`, {
+        body: { title }
+      });
+
+      dispatch(actions.resolveTodo(todo));
+
+      // localStorage.setTodos(getTodos(getState()));
+    } catch (error) {
+      alert(`${error.status} - ${error.message}`);
+    }
+  };
+};

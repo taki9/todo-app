@@ -8,15 +8,20 @@ import { clearAllTodo } from '../actions/thunks';
 class ClearTodo extends React.PureComponent {
   render() {
     return (
-      <button className="clear-todo" onClick={ev => this.props.clearAllTodo()}>Clear</button>
-    )
+      <button className="clear-todo" onClick={ev => this.props.clearAllTodo()}>
+        Clear
+      </button>
+    );
   }
 }
 
 ClearTodo.propTypes = {
   clearAllTodo: PropTypes.func.isRequired
-}
+};
 
-const mapDispatchToProps = { clearAllTodo }
+const mapDispatchToProps = { clearAllTodo };
 
-export default connect(null, mapDispatchToProps)(ClearTodo);
+export default connect(
+  null,
+  mapDispatchToProps
+)(ClearTodo);
