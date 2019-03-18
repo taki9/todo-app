@@ -2,8 +2,8 @@ import * as selectors from '../selectors';
 
 describe('selectors', () => {
   const todos = [
-    { title: 'a', completed: false },
-    { title: 'b', completed: true }
+    { id: 1, title: 'a', completed: false },
+    { id: 2, title: 'b', completed: true }
   ];
 
   describe('getSearchValue', () => {
@@ -11,6 +11,17 @@ describe('selectors', () => {
       const state = { search: 'abc' };
       const result = selectors.getSearchValue(state);
       expect(result).toBe('abc');
+    });
+  });
+
+  describe('getTodoById', () => {
+    test('it returns a todo with the requested id', () => {
+      const searchedId = 1;
+      const state = { todos };
+      const result = selectors.getTodoById(searchedId, state);
+
+      const expectedResult = todos.find(todo => todo.id === searchedId);
+      expect(result).toEqual(expectedResult);
     });
   });
 
