@@ -5,7 +5,7 @@ export const setInitialState = () => {
   return async (dispatch, getState, /* localStorage */ api) => {
     // const todos = localStorage.getTodos();
     try {
-      const todos = await api.get('http://localhost:8000/todos');
+      const todos = await api.get('/todos');
       dispatch(actions.resolveTodos(todos));
     } catch (error) {
       alert(`${error.status} - ${error.message}`);
@@ -16,7 +16,7 @@ export const setInitialState = () => {
 export const addTodo = title => {
   return async (dispatch, getState, /* localStorage */ api) => {
     try {
-      const todo = await api.post('http://localhost:8000/todos', {
+      const todo = await api.post('/todos', {
         body: { title }
       });
 
@@ -32,7 +32,7 @@ export const addTodo = title => {
 export const deleteTodo = id => {
   return async (dispatch, getState, /* localStorage */ api) => {
     try {
-      const todos = await api.delete(`http://localhost:8000/todos/${id}`);
+      const todos = await api.delete(`/todos/${id}`);
 
       dispatch(actions.resolveTodos(todos));
 
@@ -45,10 +45,10 @@ export const deleteTodo = id => {
 
 export const toggleTodo = id => {
   return async (dispatch, getState, /* localStorage */ api) => {
-    const todoBefore = getTodoById(id, getState());
+    const todoBefore = getTodoById(getState(), { id });
 
     try {
-      const todo = await api.put(`http://localhost:8000/todos/${id}`, {
+      const todo = await api.put(`/todos/${id}`, {
         body: { completed: todoBefore ? !todoBefore.completed : true }
       });
 
@@ -64,7 +64,7 @@ export const toggleTodo = id => {
 export const clearAllTodo = () => {
   return async (dispatch, getState, /* localStorage */ api) => {
     try {
-      const todos = await api.delete('http://localhost:8000/todos');
+      const todos = await api.delete('/todos');
 
       dispatch(actions.resolveTodos(todos));
 
@@ -78,7 +78,7 @@ export const clearAllTodo = () => {
 export const patchTodo = (id, title) => {
   return async (dispatch, getState, /* localStorage */ api) => {
     try {
-      const todo = await api.put(`http://localhost:8000/todos/${id}`, {
+      const todo = await api.put(`/todos/${id}`, {
         body: { title }
       });
 

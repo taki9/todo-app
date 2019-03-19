@@ -1,9 +1,12 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://localhost:8000';
+
 const call = method => async (url, { body, query, headers } = {}) => {
   const result = await axios({
     method,
     url,
+    baseURL: BASE_URL,
     headers,
     data: body,
     params: query
