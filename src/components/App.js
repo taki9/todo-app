@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { setInitialState } from '../actions/thunks';
 import Homepage from '../pages/Homepage';
+import Login from '../pages/Login';
 import Todos from '../pages/Todos';
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/" component={Homepage} />
+            <Route exact path="/login" component={Login} />
             <Route path="/todos" component={Todos} />
           </Switch>
         </header>

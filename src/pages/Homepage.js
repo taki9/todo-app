@@ -9,6 +9,9 @@ class Homepage extends React.PureComponent {
         <Link className="link" to="/todos">
           Todo List
         </Link>
+        <Link className="link" to="/login">
+          Login
+        </Link>
       </React.Fragment>
     );
   }
