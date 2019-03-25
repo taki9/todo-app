@@ -4,6 +4,8 @@ export const getSearchValue = state => state.search;
 
 export const getTodos = state => state.todos;
 
+export const getMe = state => state.me;
+
 export const getTodoById = createSelector(
   [getTodos, (state, { id }) => id],
   (todos, id) => todos.find(todo => todo.id === id)

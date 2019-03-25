@@ -1,5 +1,8 @@
+import { push } from 'connected-react-router';
 import * as actions from '.';
 import { /* getTodos, */ getTodoById } from '../selectors';
+
+const loginUrl = '/login';
 
 export const setInitialState = () => {
   return async (dispatch, getState, /* localStorage */ api) => {
@@ -8,6 +11,10 @@ export const setInitialState = () => {
       const todos = await api.get('/todos');
       dispatch(actions.resolveTodos(todos));
     } catch (error) {
+      if (error.status === 401) {
+        return dispatch(push(loginUrl));
+      }
+
       alert(`${error.status} - ${error.message}`);
     }
   };
@@ -24,6 +31,10 @@ export const addTodo = title => {
 
       // localStorage.setTodos(getTodos(getState()));
     } catch (error) {
+      if (error.status === 401) {
+        return dispatch(push(loginUrl));
+      }
+
       alert(`${error.status} - ${error.message}`);
     }
   };
@@ -38,6 +49,10 @@ export const deleteTodo = id => {
 
       // localStorage.setTodos(getTodos(getState()));
     } catch (error) {
+      if (error.status === 401) {
+        return dispatch(push(loginUrl));
+      }
+
       alert(`${error.status} - ${error.message}`);
     }
   };
@@ -56,6 +71,10 @@ export const toggleTodo = id => {
 
       // localStorage.setTodos(getTodos(getState()));
     } catch (error) {
+      if (error.status === 401) {
+        return dispatch(push(loginUrl));
+      }
+
       alert(`${error.status} - ${error.message}`);
     }
   };
@@ -70,6 +89,10 @@ export const clearAllTodo = () => {
 
       // localStorage.setTodos(getTodos(getState()));
     } catch (error) {
+      if (error.status === 401) {
+        return dispatch(push(loginUrl));
+      }
+
       alert(`${error.status} - ${error.message}`);
     }
   };
@@ -86,7 +109,44 @@ export const patchTodo = (id, title) => {
 
       // localStorage.setTodos(getTodos(getState()));
     } catch (error) {
+      if (error.status === 401) {
+        return dispatch(push(loginUrl));
+      }
+
       alert(`${error.status} - ${error.message}`);
     }
   };
 };
+
+export const login = (username, password) => {
+  return async (dispatch, getState, api) => {
+    try {
+      const data = await api.post('/login', {
+        body: { username, password }
+      });
+
+      dispatch(actions.resolveMe(data.me));
+
+      return data.token;
+    } catch (error) {
+      alert(`${error.status} - ${error.message}`);
+    }
+  };
+};
+
+export const renewToken = token => {
+  return async (dispatch, getState, api) => {
+    try {
+      const data = await api.put('/login', {
+        body: { prevJwt: token }
+      });
+
+      dispatch(actions.resolveMe(data.me));
+
+      return data.token;
+    } catch (error) {
+      alert(`${error.status} - ${error.message}`);
+    }
+  };
+};
+

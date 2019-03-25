@@ -3,11 +3,15 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:8000';
 
 const call = method => async (url, { body, query, headers } = {}) => {
+  const defaultHeaders = {
+    'Authorization': `Bearer ${sessionStorage.getItem('jwtToken') || ''}`
+  };
+
   const result = await axios({
     method,
     url,
     baseURL: BASE_URL,
-    headers,
+    headers: Object.assign(defaultHeaders, headers),
     data: body,
     params: query
   }).catch(error => {

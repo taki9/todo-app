@@ -11,6 +11,8 @@ const todos = (state = [], action) => {
       return [...state, action.todo];
     case actionNames.RESOLVE_TODOS:
       return action.todos;
+    case actionNames.LOGOUT:
+      return [];
     default:
       return state;
   }

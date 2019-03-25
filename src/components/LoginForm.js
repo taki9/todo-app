@@ -1,4 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { login } from '../actions/thunks';
+import { push } from 'connected-react-router';
+import { withRouter } from 'react-router-dom';
 
 class LoginForm extends React.PureComponent {
   state = {
@@ -12,8 +17,17 @@ class LoginForm extends React.PureComponent {
     });
   }
 
-  handleSubmit(ev) {
+  async handleSubmit(ev) {
     ev.preventDefault();
+
+    const token = await this.props.login(this.state.username, this.state.password);
+
+    if (token) {
+      sessionStorage.setItem('jwtToken', token);
+
+      return this.props.push('/todos');
+    }
+
     this.setState({
       username: '',
       password: ''
@@ -53,6 +67,16 @@ class LoginForm extends React.PureComponent {
       </form>
     );
   }
-}
+};
 
-export default LoginForm;
+LoginForm.propTypes = {
+  login: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = { login, push };
+
+export default withRouter(connect(
+  null,
+  mapDispatchToProps
+)(LoginForm));
