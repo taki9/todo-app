@@ -12,6 +12,8 @@ export const setInitialState = () => {
       dispatch(actions.resolveTodos(todos));
     } catch (error) {
       if (error.status === 401) {
+        sessionStorage.removeItem('jwtToken');
+        dispatch(actions.logout());
         return dispatch(push(loginUrl));
       }
 
@@ -32,6 +34,8 @@ export const addTodo = title => {
       // localStorage.setTodos(getTodos(getState()));
     } catch (error) {
       if (error.status === 401) {
+        sessionStorage.removeItem('jwtToken');
+        dispatch(actions.logout());
         return dispatch(push(loginUrl));
       }
 
@@ -50,6 +54,8 @@ export const deleteTodo = id => {
       // localStorage.setTodos(getTodos(getState()));
     } catch (error) {
       if (error.status === 401) {
+        sessionStorage.removeItem('jwtToken');
+        dispatch(actions.logout());
         return dispatch(push(loginUrl));
       }
 
@@ -72,6 +78,8 @@ export const toggleTodo = id => {
       // localStorage.setTodos(getTodos(getState()));
     } catch (error) {
       if (error.status === 401) {
+        sessionStorage.removeItem('jwtToken');
+        dispatch(actions.logout());
         return dispatch(push(loginUrl));
       }
 
@@ -90,6 +98,8 @@ export const clearAllTodo = () => {
       // localStorage.setTodos(getTodos(getState()));
     } catch (error) {
       if (error.status === 401) {
+        sessionStorage.removeItem('jwtToken');
+        dispatch(actions.logout());
         return dispatch(push(loginUrl));
       }
 
@@ -110,6 +120,8 @@ export const patchTodo = (id, title) => {
       // localStorage.setTodos(getTodos(getState()));
     } catch (error) {
       if (error.status === 401) {
+        sessionStorage.removeItem('jwtToken');
+        dispatch(actions.logout());
         return dispatch(push(loginUrl));
       }
 
@@ -145,6 +157,12 @@ export const renewToken = token => {
 
       return data.token;
     } catch (error) {
+      if (error.status === 401) {
+        sessionStorage.removeItem('jwtToken');
+        dispatch(actions.logout());
+        return dispatch(push(loginUrl));
+      }
+
       alert(`${error.status} - ${error.message}`);
     }
   };
